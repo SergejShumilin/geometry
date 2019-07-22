@@ -1,32 +1,56 @@
 package by.javatr.geometry.entity;
 
+import by.javatr.geometry.observer.Observer;
+
 public class Quadrangle {
+    private long id;
     private Point first;
     private Point second;
     private Point third;
     private Point fourth;
+    private Observer observer;
+    private static long idCounter = 0;
 
     public Quadrangle(Point first, Point second, Point third, Point fourth) {
+        this.id = ++idCounter;
         this.first = first;
         this.second = second;
         this.third = third;
         this.fourth = fourth;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public void setFirst(Point first) {
         this.first = first;
+        notifyObserver();
     }
 
     public void setSecond(Point second) {
         this.second = second;
+        notifyObserver();
     }
 
     public void setThird(Point third) {
         this.third = third;
+        notifyObserver();
     }
 
     public void setFourth(Point fourth) {
         this.fourth = fourth;
+        notifyObserver();
+    }
+
+    public void setObserver(Observer observer) {
+        this.observer = observer;
+    }
+
+    private void notifyObserver() {
+        if (observer!=null){
+            observer.update(this);
+        }
     }
 
     public Point getFirst() {

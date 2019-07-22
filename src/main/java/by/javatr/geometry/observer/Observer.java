@@ -1,7 +1,7 @@
 package by.javatr.geometry.observer;
 
-import by.javatr.geometry.entity.QuadrangleCopy;
+import by.javatr.geometry.entity.Quadrangle;
 
 public interface Observer {
-    public void update(QuadrangleCopy quadrangle);
+    public void update(Quadrangle quadrangle);
 }

@@ -25,4 +25,12 @@ public class Parameters {
         this.perimeter = perimeter;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Parameters{");
+        sb.append("area=").append(area);
+        sb.append(", perimeter=").append(perimeter);
+        sb.append('}');
+        return sb.toString();
+    }
 }
