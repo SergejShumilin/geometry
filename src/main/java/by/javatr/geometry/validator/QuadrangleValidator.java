@@ -1,15 +1,15 @@
 package by.javatr.geometry.validator;
 
-import by.javatr.geometry.calculator.HelperCalculator;
+import by.javatr.geometry.calculator.CalculatorHelper;
 import by.javatr.geometry.entity.Point;
 import by.javatr.geometry.entity.Quadrangle;
 
 public class QuadrangleValidator {
 
-    private HelperCalculator helperCalculator;
+    private CalculatorHelper calculatorHelper;
 
-    public QuadrangleValidator(HelperCalculator helperCalculator) {
-        this.helperCalculator = helperCalculator;
+    public QuadrangleValidator(CalculatorHelper calculatorHelper) {
+        this.calculatorHelper = calculatorHelper;
     }
 
     public boolean isQuadrangle(Quadrangle quadrangle){
@@ -27,23 +27,23 @@ public class QuadrangleValidator {
     }
 
     public boolean isTrapezoid(Quadrangle quadrangle) {
-        int sideA = helperCalculator.calculateLengthSideA(quadrangle);
-        int sideC = helperCalculator.calculateLengthSideC(quadrangle);
+        int sideA = calculatorHelper.calculateLengthSideA(quadrangle);
+        int sideC = calculatorHelper.calculateLengthSideC(quadrangle);
         return sideA != sideC;
     }
 
     public boolean isSquare(Quadrangle quadrangle) {
-        int sideA = helperCalculator.calculateLengthSideA(quadrangle);
-        int sideB = helperCalculator.calculateLengthSideB(quadrangle);
-        int sideC = helperCalculator.calculateLengthSideC(quadrangle);
+        int sideA = calculatorHelper.calculateLengthSideA(quadrangle);
+        int sideB = calculatorHelper.calculateLengthSideB(quadrangle);
+        int sideC = calculatorHelper.calculateLengthSideC(quadrangle);
 
         return sideA == sideB && sideA == sideC;
     }
 
     public boolean isRhombus(Quadrangle quadrangle){
-        int sideA = helperCalculator.calculateLengthSideA(quadrangle);
-        int sideB = helperCalculator.calculateLengthSideB(quadrangle);
-        int sideC = helperCalculator.calculateLengthSideC(quadrangle);
+        int sideA = calculatorHelper.calculateLengthSideA(quadrangle);
+        int sideB = calculatorHelper.calculateLengthSideB(quadrangle);
+        int sideC = calculatorHelper.calculateLengthSideC(quadrangle);
 
         return sideA == sideB && sideA != sideC;
     }

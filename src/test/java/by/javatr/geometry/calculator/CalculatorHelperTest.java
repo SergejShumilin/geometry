@@ -5,15 +5,15 @@ import by.javatr.geometry.entity.Quadrangle;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class HelperCalculatorTest {
-    private static final HelperCalculator calculator = new HelperCalculator();
-    private static final Quadrangle quadrangle = new Quadrangle(new Point(1, 2), new Point(2, 2), new Point(2, 1), new Point(1, 1));
+public class CalculatorHelperTest {
+    private CalculatorHelper calculator = new CalculatorHelper();
+    private static final Quadrangle QUADRANGLE = new Quadrangle(new Point(1, 2), new Point(2, 2), new Point(2, 1), new Point(1, 1));
 
     @Test
     public void testCalculateLengthSideAShouldReturnRightLength() {
         //given
         //when
-        int actual = calculator.calculateLengthSideA(quadrangle);
+        int actual = calculator.calculateLengthSideA(QUADRANGLE);
         //then
         Assert.assertEquals(1, actual);
     }
@@ -22,7 +22,7 @@ public class HelperCalculatorTest {
     public void testCalculateLengthSideBShouldReturnRightLength() {
         //given
         //when
-        int actual = calculator.calculateLengthSideB(quadrangle);
+        int actual = calculator.calculateLengthSideB(QUADRANGLE);
         //then
         Assert.assertEquals(1, actual);
     }
@@ -31,7 +31,7 @@ public class HelperCalculatorTest {
     public void testCalculateLengthSideCShouldReturnRightLength() {
         //given
         //when
-        int actual = calculator.calculateLengthSideC(quadrangle);
+        int actual = calculator.calculateLengthSideC(QUADRANGLE);
         //then
         Assert.assertEquals(1, actual);
     }
@@ -40,7 +40,7 @@ public class HelperCalculatorTest {
     public void testCalculateLengthSideDShouldReturnRightLength() {
         //given
         //when
-        int actual = calculator.calculateLengthSideC(quadrangle);
+        int actual = calculator.calculateLengthSideC(QUADRANGLE);
         //then
         Assert.assertEquals(1, actual);
     }

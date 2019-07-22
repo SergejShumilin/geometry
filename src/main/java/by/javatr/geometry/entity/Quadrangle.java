@@ -13,6 +13,22 @@ public class Quadrangle {
         this.fourth = fourth;
     }
 
+    public void setFirst(Point first) {
+        this.first = first;
+    }
+
+    public void setSecond(Point second) {
+        this.second = second;
+    }
+
+    public void setThird(Point third) {
+        this.third = third;
+    }
+
+    public void setFourth(Point fourth) {
+        this.fourth = fourth;
+    }
+
     public Point getFirst() {
         return first;
     }
@@ -31,14 +47,24 @@ public class Quadrangle {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
 
         Quadrangle that = (Quadrangle) o;
 
-        if (first != null ? !first.equals(that.first) : that.first != null) return false;
-        if (second != null ? !second.equals(that.second) : that.second != null) return false;
-        if (third != null ? !third.equals(that.third) : that.third != null) return false;
+        if (first != null ? !first.equals(that.first) : that.first != null){
+            return false;
+        }
+        if (second != null ? !second.equals(that.second) : that.second != null){
+            return false;
+        }
+        if (third != null ? !third.equals(that.third) : that.third != null){
+            return false;
+        }
         return fourth != null ? fourth.equals(that.fourth) : that.fourth == null;
     }
 

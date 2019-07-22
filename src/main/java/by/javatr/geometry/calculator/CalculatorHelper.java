@@ -3,7 +3,7 @@ package by.javatr.geometry.calculator;
 import by.javatr.geometry.entity.Point;
 import by.javatr.geometry.entity.Quadrangle;
 
-public class HelperCalculator {
+public class CalculatorHelper {
 
     public int calculateLengthSideA(Quadrangle quadrangle) {
         Point first = quadrangle.getFirst();

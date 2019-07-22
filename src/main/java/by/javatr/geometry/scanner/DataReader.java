@@ -1,6 +1,6 @@
 package by.javatr.geometry.scanner;
 
-import org.apache.log4j.Logger;
+import by.javatr.geometry.exception.DataMissingException;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -11,9 +11,7 @@ import java.util.List;
 
 public class DataReader {
 
-//    private static final Logger LOG = Logger.getLogger(DataReader.class);
-
-    public List<String> readFromFile(String path) throws IOException {
+    public List<String> readFromFile(String path) throws DataMissingException, IOException {
         List<String> list = new ArrayList<String>();
         BufferedReader bufferedReader = null;
         try {
@@ -23,7 +21,11 @@ public class DataReader {
                 list.add(line);
             }
         } catch (FileNotFoundException e) {
-//            LOG.error(e.getMessage(), e);
+            throw new DataMissingException();
+        }  finally {
+            if (bufferedReader != null) {
+                bufferedReader.close();
+            }
         }
         return list;
     }

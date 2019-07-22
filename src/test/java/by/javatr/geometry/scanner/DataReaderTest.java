@@ -1,37 +1,40 @@
 package by.javatr.geometry.scanner;
 
-import org.junit.After;
+import by.javatr.geometry.exception.DataMissingException;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class DataReaderTest {
 
-    private static final DataReader reader = new DataReader();
-    private static final List<String> expected = new ArrayList<>();
+    private DataReader reader = new DataReader();
+    private static final String PATH = ".\\src\\test\\resources\\data.txt";
+    private static final String INCORRECT_PATH = ".\\src\\test\\resources\\dat.txt";
+    private static final List<String> EXPECTED = Arrays.asList(
+            "fghj 1 sdsf 2 2 ghvfk 2 f 2 1 1 1",
+            "2 gjhjg 3 bhb 2 bhjll 2 e 2 3 4 5"
+    );
 
-    @Before
-    public void fillCollection(){
-        expected.addAll(Arrays.asList("fghj 1 sdsf 2 2 ghvfk 2 f 2 1 1 1"));
-        expected.addAll(Arrays.asList("2 gjhjg 3 bhb 2 bhjll 2 e 2 3 4 5"));
-    }
-    @After
-    public void clearCollection(){
-        expected.clear();
-    }
+
 
     @Test
-    public void testReadFromFileShouldReturnListInteger() throws IOException {
+    public void testReadFromFileShouldReturnListInteger() throws IOException, DataMissingException {
         //given
         //when
-        List<String> actual = reader.readFromFile(".\\src\\test\\resources\\data.txt");
+        List<String> actual = reader.readFromFile(PATH);
         //then
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(EXPECTED, actual);
+    }
+
+    @Test(expected = DataMissingException.class)
+    public void testReadFromFileShouldThrowException() throws IOException, DataMissingException {
+        //given
+        //when
+        List<String> actual = reader.readFromFile(INCORRECT_PATH);
+        //then
     }
 
 }

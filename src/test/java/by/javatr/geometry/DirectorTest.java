@@ -4,6 +4,7 @@ import by.javatr.geometry.Director;
 import by.javatr.geometry.creator.QuadrangleCreator;
 import by.javatr.geometry.entity.Point;
 import by.javatr.geometry.entity.Quadrangle;
+import by.javatr.geometry.exception.DataMissingException;
 import by.javatr.geometry.exception.IncorrectCoordinateException;
 import by.javatr.geometry.scanner.DataReader;
 import by.javatr.geometry.validator.DataParser;
@@ -21,32 +22,31 @@ import java.util.List;
 import java.util.Optional;
 
 public class DirectorTest {
-    private static final DataReader dataReader = Mockito.mock(DataReader.class);
-    private static final DataParser parser = Mockito.mock(DataParser.class);
-    private static final QuadrangleCreator creator = Mockito.mock(QuadrangleCreator.class);
-    private static final Director director = new Director(new DataReader(), new DataParser(), new QuadrangleCreator(new DataValidator()));
+    private DataReader dataReader = Mockito.mock(DataReader.class);
+    private DataParser parser = Mockito.mock(DataParser.class);
+    private QuadrangleCreator creator = Mockito.mock(QuadrangleCreator.class);
+    private Director director = new Director(dataReader, parser, creator);
     private static final List<String> list = Arrays.asList("fghj 1 sdsf 2 2 ghvfk 2 f 2 1 1 1");
-    private static final String line = "fghj 1 sdsf 2 2 ghvfk 2 f 2 1 1 1";
+    private static final String PATH = ".\\src\\test\\resources\\data.txt";
     private static final List<Integer> integers = Arrays.asList(1, 2, 2, 2, 2, 1, 1, 1);
     private static final Quadrangle quadrangle = new Quadrangle(new Point(1, 2), new Point(2, 2), new Point(2, 1), new Point(1, 1));
-    private static final  List<Optional<Quadrangle>> listQuadrangle = new ArrayList<>();
+    private static final List<Quadrangle> listQuadrangle = new ArrayList<>();
 
     @Before
-    public void fillCollection(){
-        listQuadrangle.add(Optional.of(quadrangle));
+    public void init() throws IOException, DataMissingException {
+        Mockito.when(dataReader.readFromFile(PATH)).thenReturn(list);
+        Mockito.when(parser.parseString(list.get(0))).thenReturn(integers);
+        Mockito.when(creator.createQuadrangle(integers)).thenReturn(Optional.of(quadrangle));
+        listQuadrangle.add(quadrangle);
     }
-    @Before
-    public void clearCollection(){
-        listQuadrangle.clear();
-    }
+
 
     @Test
-    public void testCreateQuadrangleShould() throws IOException, IncorrectCoordinateException {
-        Mockito.when(dataReader.readFromFile(".\\data.txt")).thenReturn(list);
-        Mockito.when(parser.parseString(line)).thenReturn(integers);
-        Mockito.when(creator.createQuadrangle(integers)).thenReturn(Optional.of(quadrangle));
-        List<Optional<Quadrangle>> actual = director.createQuadrangle(".\\src\\test\\resources\\listData.txt");
-
+    public void testCreateQuadrangleShouldReturnListQuadrangle() throws IOException, DataMissingException {
+        //given
+        //when
+        List<Quadrangle> actual = director.createQuadrangle(PATH);
+        //then
         Assert.assertEquals(listQuadrangle, actual);
     }
 }
